@@ -1,0 +1,1454 @@
+{
+	"info": {
+		"_postman_id": "813ecaf5-7961-49f7-8a05-af13b7d4202f",
+		"name": "marvel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API Test  for use cases 1",
+			"item": [
+				{
+					"name": "Test for Code 409 without hash",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"var getconcat= datetime ;\r",
+									"var gethash = CryptoJS.SHA256(getconcat);\r",
+									"var getSig = CryptoJS.enc.Base64.stringify(gethash);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"response must have code - MissingParameter\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"MissingParameter\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - You must provide a hash.\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"You must provide a hash.\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?ts={{timestamp}}&apikey={{publicKey}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test for Code 409 without hash value",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"var getconcat= datetime ;\r",
+									"var gethash = CryptoJS.SHA256(getconcat);\r",
+									"var getSig = CryptoJS.enc.Base64.stringify(gethash);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"response must have code - MissingParameter\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"MissingParameter\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - You must provide a hash.\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"You must provide a hash.\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?ts={{timestamp}}&apikey={{publicKey}}&hash=",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								},
+								{
+									"key": "hash",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test for Code 409 without API KEY",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"response must have code - MissingParameter\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"MissingParameter\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - You must provide a user key\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"You must provide a user key.\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?ts={{timestamp}}&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test for Code 409 without timestamp.",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"response must have code - MissingParameter\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"MissingParameter\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - You must provide a timestamp.\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"You must provide a timestamp.\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?apikey={{publicKey}}&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test for Code 403",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"response must have code - MissingParameter\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"MissingParameter\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - You must provide a hash.\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"You must provide a hash.\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?ts={{timestamp}}&apikey=671038d55d5580b6043b8cf6393dde43&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "671038d55d5580b6043b8cf6393dde43"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test for Code 401 with Invalid API Key",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"response must have code - InvalidCredentials\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"InvalidCredentials\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - The passed API key is invalid.\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"The passed API key is invalid.\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?ts={{$timestamp}}&apikey={{publicKey}}1&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{$timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}1"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test for Code 401 with Invalid HASH",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"response must have code - InvalidCredentials\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"InvalidCredentials\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - That hash, timestamp and key combination is invalid.\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"That hash, timestamp and key combination is invalid.\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?ts={{timestamp}}&apikey={{publicKey}}&hash={{hashc}}1",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test for Code 405 with POST call",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"response must have code - MethodNotAllowedError\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"MethodNotAllowedError\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - POST is not allowed\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"POST is not allowed\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?ts={{timestamp}}&apikey={{publicKey}}&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test for Code 405 with PUT call",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"response must have code - MethodNotAllowedError\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"MethodNotAllowedError\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - PUT is not allowed\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"PUT is not allowed\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?ts={{timestamp}}&apikey={{publicKey}}&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test for Code 405 with PATCH call",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"response must have code - MethodNotAllowedError\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"MethodNotAllowedError\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - PATCH is not allowed\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"PATCH is not allowed\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?ts={{timestamp}}&apikey={{publicKey}}&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test for Code 405 with DELETE call",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"response must have code - MethodNotAllowedError\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"code\",\"MethodNotAllowedError\"); ",
+									"});",
+									"",
+									"pm.test(\"response must have message - DELETE is not allowed\", function () { ",
+									"   pm.response.to.have.jsonBody(\"message\",\"DELETE is not allowed\"); ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/series?ts={{timestamp}}&apikey={{publicKey}}&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"series"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API Test  for use cases 2",
+			"item": [
+				{
+					"name": "Test for Code 200",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response must have format - Comic\", function () {",
+									"   ",
+									"   pm.response.to.have.jsonBody(\"format\",\"Comic\"); ",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    console.log(jsonData);",
+									"    ",
+									"    var x= jsonData.data.results[0].format;",
+									"     //console.log(x);",
+									"  pm.expect(jsonData.data.results[0].format).to.equal(\"Comic\");",
+									"   pm.expect(jsonData.data.results[0].name).to.equal(\"Spider-Man (Ultimate)\");",
+									"",
+									"    ",
+									"});",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"OK\");",
+									"});",
+									"",
+									"  // var jsonData = JSON.parse(responseBody);",
+									"//console.log(jsonData);",
+									"//postman.setEnvironmentVariable(\"token2\", jsonData.data.results[0].name);",
+									"  // pm.response.to.have.string(\"Spider-Man (Ultimate)\",jsonData.data.results[0].name); ",
+									"  /*var x= jsonData.data.results[0].format;",
+									"  console.log(x);",
+									" postman.setEnvironmentVariable('x', x);",
+									"   var jsonData = JSON.parse(responseBody);",
+									"  pm.expect(jsonData.data.results[0].format).to.equal(\"Comic\");*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/comics/27649?ts={{timestamp}}&apikey={{publicKey}}&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"comics",
+								"27649"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API Test  for use cases 3",
+			"item": [
+				{
+					"name": "Test for response containing Charachter \"Spider-Man (Ultimate)\" and last modification was later than January 2014",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"verify the name of this character is Spider-Man (Ultimate)\", function () {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"  pm.expect(jsonData.data.results[0].name).to.equal(\"Spider-Man (Ultimate)\");",
+									"});",
+									"",
+									"pm.test(\"provided thumbnail is a valid image url\", function () {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    var thumbnailpath= jsonData.data.results[0].thumbnail.path;",
+									"    var extension= jsonData.data.results[0].thumbnail.extension;",
+									"   var url1= thumbnailpath+\".\"+extension;",
+									"   ",
+									"   postman.setEnvironmentVariable('testURL', url1);",
+									"   postman.setNextRequest('Test Thumbnail URL');",
+									"});",
+									"",
+									"pm.test(\"verify the name of this character is Spider-Man (Ultimate)\", function () {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    var dt= jsonData.data.results[0].modified;",
+									"    var d = new Date(dt);",
+									"    var y =  d.getMonth();",
+									" //   console.log(d);",
+									"    console.log(y);",
+									"//  pm.expect(jsonData.data.results[0].modified).to.equal(\"Spider-Man (Ultimate)\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/characters/1011010?ts={{timestamp}}&apikey={{publicKey}}&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"characters",
+								"1011010"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Thumbnail URL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"pm.test(\"response code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{testURL}}",
+							"host": [
+								"{{testURL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API Test  for use cases 4",
+			"item": [
+				{
+					"name": "Test for Code 404 and respnse not returning Spider-Man (Ultimate)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
+								"exec": [
+									"var now = new Date();\r",
+									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
+									"var random = Math.random().toString(36).substring(7);\r",
+									"var month = currentTime.getMonth() + 1;\r",
+									"if(month<10) {   month='0'+month } \r",
+									"var day = currentTime.getDate();\r",
+									"if(day<10){    day='0'+day } \r",
+									"var year = currentTime.getFullYear();\r",
+									"var hours = currentTime.getHours();\r",
+									"if(hours<10){   hours='0'+hours } \r",
+									"var minutes = currentTime.getMinutes();\r",
+									"if(minutes<10){ minutes='0'+minutes }\r",
+									"var seconds = currentTime.getSeconds();\r",
+									"if(seconds<10){    seconds='0'+seconds }\r",
+									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
+									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
+									"\r",
+									"\r",
+									"var publicKey= postman.getEnvironmentVariable(\"publicKey\");\r",
+									"var timestamp= datetime;\r",
+									"var privatekey= postman.getEnvironmentVariable(\"privatekey\");\r",
+									"var hash = CryptoJS.MD5(timestamp + privatekey+ publicKey);\r",
+									"\r",
+									"\r",
+									"postman.setEnvironmentVariable('hashc', hash);\r",
+									"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
+								"exec": [
+									"",
+									"pm.test(\"response code should be 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"",
+									"pm.test(\"verify endpoint should NOT return Spider-Man (Ultimate) \", function () {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"  pm.expect(jsonData.data.results[0].name).to.not.include(\"Spider-Man (Ultimate)\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://gateway.marvel.com/v1/public/characters/1011010xxxxxx?ts={{timestamp}}&apikey={{publicKey}}&hash={{hashc}}",
+							"protocol": "http",
+							"host": [
+								"gateway",
+								"marvel",
+								"com"
+							],
+							"path": [
+								"v1",
+								"public",
+								"characters",
+								"1011010xxxxxx"
+							],
+							"query": [
+								{
+									"key": "ts",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "apikey",
+									"value": "{{publicKey}}"
+								},
+								{
+									"key": "hash",
+									"value": "{{hashc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

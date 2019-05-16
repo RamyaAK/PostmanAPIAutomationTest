@@ -1,0 +1,11 @@
+version: 2.1
+orbs:
+  newman: postman/newman@0.0.2
+jobs:
+  newman-collection-run:
+    executor: newman/postman-newman-docker
+    steps:
+      - checkout
+      - newman/newman-run:
+                collection: ./marvel.postman_collection.json
+                environment: ./marveltest.postman_environment.json
