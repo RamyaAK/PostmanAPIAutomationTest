@@ -98,99 +98,6 @@
 					"response": []
 				},
 				{
-					"name": "Test for Code 409 without hash value",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "17de117d-ea26-4d6d-a3cd-5e3adfb7bc16",
-								"exec": [
-									"var now = new Date();\r",
-									"var currentTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);\r",
-									"var random = Math.random().toString(36).substring(7);\r",
-									"var month = currentTime.getMonth() + 1;\r",
-									"if(month<10) {   month='0'+month } \r",
-									"var day = currentTime.getDate();\r",
-									"if(day<10){    day='0'+day } \r",
-									"var year = currentTime.getFullYear();\r",
-									"var hours = currentTime.getHours();\r",
-									"if(hours<10){   hours='0'+hours } \r",
-									"var minutes = currentTime.getMinutes();\r",
-									"if(minutes<10){ minutes='0'+minutes }\r",
-									"var seconds = currentTime.getSeconds();\r",
-									"if(seconds<10){    seconds='0'+seconds }\r",
-									"var datetime = year + \"\" + month + \"\" + day + \"\" + hours+ \"\" + minutes+ \"\" + seconds+\"\";\r",
-									"var utcdatetime = year + \"-\" + month + \"-\" + day + \"T\" + hours+ \":\" + minutes+ \":\" + seconds +\"Z\";\r",
-									"\r",
-									"var getconcat= datetime ;\r",
-									"var gethash = CryptoJS.SHA256(getconcat);\r",
-									"var getSig = CryptoJS.enc.Base64.stringify(gethash);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
-								"exec": [
-									"",
-									"pm.test(\"response code is 409\", function () {",
-									"    pm.response.to.have.status(409);",
-									"});",
-									"",
-									"pm.test(\"response must have code - MissingParameter\", function () {",
-									"   ",
-									"   pm.response.to.have.jsonBody(\"code\",\"MissingParameter\"); ",
-									"});",
-									"",
-									"pm.test(\"response must have message - You must provide a hash.\", function () { ",
-									"   pm.response.to.have.jsonBody(\"message\",\"You must provide a hash.\"); ",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://gateway.marvel.com/v1/public/series?ts={{timestamp}}&apikey={{publicKey}}&hash=",
-							"protocol": "http",
-							"host": [
-								"gateway",
-								"marvel",
-								"com"
-							],
-							"path": [
-								"v1",
-								"public",
-								"series"
-							],
-							"query": [
-								{
-									"key": "ts",
-									"value": "{{timestamp}}"
-								},
-								{
-									"key": "apikey",
-									"value": "{{publicKey}}"
-								},
-								{
-									"key": "hash",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Test for Code 409 without API KEY",
 					"event": [
 						{
@@ -427,18 +334,10 @@
 								"id": "1315b9b2-11bf-40ec-802d-3462321d7345",
 								"exec": [
 									"",
-									"pm.test(\"response code is 409\", function () {",
-									"    pm.response.to.have.status(409);",
+									"pm.test(\"response code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
 									"});",
-									"",
-									"pm.test(\"response must have code - MissingParameter\", function () {",
-									"   ",
-									"   pm.response.to.have.jsonBody(\"code\",\"MissingParameter\"); ",
-									"});",
-									"",
-									"pm.test(\"response must have message - You must provide a hash.\", function () { ",
-									"   pm.response.to.have.jsonBody(\"message\",\"You must provide a hash.\"); ",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -1249,13 +1148,13 @@
 									"   postman.setNextRequest('Test Thumbnail URL');",
 									"});",
 									"",
-									"pm.test(\"verify the name of this character is Spider-Man (Ultimate)\", function () {",
+									"pm.test(\"verify the last modified date should be greater than jan 2014\", function () {",
 									"    var jsonData = JSON.parse(responseBody);",
 									"    var dt= jsonData.data.results[0].modified;",
 									"    var d = new Date(dt);",
 									"    var y =  d.getMonth();",
 									" //   console.log(d);",
-									"    console.log(y);",
+									"    console.log(d);",
 									"//  pm.expect(jsonData.data.results[0].modified).to.equal(\"Spider-Man (Ultimate)\");",
 									"});"
 								],
