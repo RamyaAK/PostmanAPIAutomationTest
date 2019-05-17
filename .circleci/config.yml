@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     docker:
-      # using custom image, see .circleci/images/primary/Dockerfile
       - image: circleci/node
       
     working_directory: ~/repo
@@ -12,7 +11,6 @@ jobs:
       - run:
           name: NPM Ignore
           command: 'sudo npm i -g npmignore'
-      # This should go into custom primary image, here's only for the sake of explanation
       - run:
           name: Install Newman
           command: 'sudo npm install -g newman'
@@ -21,11 +19,7 @@ jobs:
           name: Working Dir
           command: 'ls -la'
 
-      # This should go into custom primary image, here's only for the sake of explanation
       - run:
           name: API Testing for Marvel API
           command: 'newman run ./marvel.postman_collection.json --environment ./marveltest.postman_environment.json -r cli'
-          #command: 'newman run /home/circleci/repo/collection.json --environment /home/circleci/repo/env.json'
-
-                #collection: ./marvel.postman_collection.json
-                #environment: ./marveltest.postman_environment.json
+   
